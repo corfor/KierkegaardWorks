@@ -1,14 +1,24 @@
 var skViewer;
 (function (skViewer) {
     'use strict';
-    var module = angular.module("skViewer", ["ngRoute"]);
+    var module = angular.module('skViewer', ['ngRoute', 'ngLodash']);
     var PublicationsController = (function () {
         function PublicationsController($scope, $http) {
             var _this = this;
+            this.itemFilter = function (item) {
+                var p = item;
+                switch (p.Type) {
+                    case 'Article':
+                    case 'Pamphlet':
+                        return _this.showArticles;
+                    default:
+                        return _this.showBooks;
+                }
+            };
             this.showBooks = true;
             this.showArticles = true;
             $http.get("js/Publications.json").success(function (data) {
-                _this.Items = data;
+                _this.items = data;
             });
         }
         PublicationsController.prototype.getClass = function (pub) {
@@ -29,15 +39,6 @@ var skViewer;
                 case 'Article': return 'fa fa-file-o article';
                 case 'Pamphlet': return 'fa fa-file-o pamphlet';
                 default: return 'fa fa-book';
-            }
-        };
-        PublicationsController.prototype.isRowShown = function (pub) {
-            switch (pub.Type) {
-                case 'Article':
-                case 'Pamphlet':
-                    return this.showArticles;
-                default:
-                    return this.showBooks;
             }
         };
         return PublicationsController;

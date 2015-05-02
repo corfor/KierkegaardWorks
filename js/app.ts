@@ -1,6 +1,6 @@
 module skViewer {
     'use strict';
-    var module = angular.module("skViewer", ["ngRoute"]);
+    var module = angular.module('skViewer', ['ngRoute', 'ngLodash']);
 
     interface IPublication {
         Id:number;
@@ -13,14 +13,18 @@ module skViewer {
 
     class PublicationsController {
         public Count;
-        public Items:IPublication[];
+        public items:IPublication[];
+        public filtered:IPublication[];
+        public showBooks:boolean;
+        public showArticles:boolean;
 
         constructor($scope:ng.IScope, $http:ng.IHttpService) {
             this.showBooks=true;
             this.showArticles=true;
             $http.get("js/Publications.json").success(data => {
-                this.Items = data;
+                this.items = data;
             });
+
         }
 
         public getClass(pub:IPublication):string {
@@ -45,19 +49,16 @@ module skViewer {
             }
         }
 
-        public isRowShown(pub:IPublication):boolean
-        {
-            switch (pub.Type){
+        public itemFilter = item => {
+            var p:IPublication = item;
+            switch (p.Type) {
                 case 'Article':
                 case 'Pamphlet':
                     return this.showArticles;
-                default:
+                default :
                     return this.showBooks;
             }
-        }
-
-        public showBooks:boolean;
-        public showArticles:boolean;
+        };
     }
     module.controller("PublicationsController", PublicationsController)
 

@@ -14,5 +14,6 @@
     <orderEntry type="library" name="bootstrap-toggle" level="application" />
     <orderEntry type="library" name="angular" level="application" />
     <orderEntry type="library" name="angular-route" level="application" />
+    <orderEntry type="library" name="lodash" level="application" />
   </component>
 </module>
