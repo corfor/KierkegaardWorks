@@ -1,25 +1,32 @@
-var skViewer;
-(function (skViewer) {
+/// <reference path="angular.d.ts" />
+var Kierkegaard;
+(function (Kierkegaard) {
     'use strict';
-    var module = angular.module('skViewer', ['ngRoute', 'ngLodash']);
+    var module = angular.module('Kierkegaard', []);
     var PublicationsController = (function () {
-        function PublicationsController($scope, $http) {
+        function PublicationsController($http) {
             var _this = this;
             this.itemFilter = function (item) {
-                var p = item;
-                switch (p.Type) {
+                var t = _this;
+                var qualifies = false;
+                switch (item.Type) {
                     case 'Article':
                     case 'Pamphlet':
-                        return _this.showArticles;
+                        qualifies = t.showArticles;
+                        break;
                     default:
-                        return _this.showBooks;
+                        qualifies = t.showBooks;
+                        break;
                 }
+                if (qualifies && _this.searchCriteria) {
+                    var searchCriteria = t.searchCriteria.toLowerCase();
+                    qualifies = item.Title.toLowerCase().indexOf(searchCriteria) !== -1 || item.Author.toLowerCase().indexOf(searchCriteria) !== -1 || (item.PublishedIn && item.PublishedIn.toLowerCase().indexOf(searchCriteria) !== -1) || item.Date.toString().indexOf(searchCriteria) !== -1;
+                }
+                return qualifies;
             };
             this.showBooks = true;
             this.showArticles = true;
-            $http.get("js/Publications.json").success(function (data) {
-                _this.items = data;
-            });
+            $http.get("scripts/Publications.json").success(function (data) { return _this.items = data; });
         }
         PublicationsController.prototype.getClass = function (pub) {
             //console.log('checking ' + pub.Title);
@@ -43,6 +50,7 @@ var skViewer;
         };
         return PublicationsController;
     })();
+    Kierkegaard.PublicationsController = PublicationsController;
     module.controller("PublicationsController", PublicationsController);
-})(skViewer || (skViewer = {}));
+})(Kierkegaard || (Kierkegaard = {}));
 //# sourceMappingURL=app.js.map

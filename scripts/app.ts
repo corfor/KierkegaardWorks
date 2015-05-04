@@ -1,6 +1,7 @@
-module skViewer {
+/// <reference path="angular.d.ts" />
+module Kierkegaard {
     'use strict';
-    var module = angular.module('skViewer', ['ngRoute', 'ngLodash']);
+    var module = angular.module('Kierkegaard', []);
 
     interface IPublication {
         Id:number;
@@ -11,20 +12,17 @@ module skViewer {
         PublishedIn:string;
     }
 
-    class PublicationsController {
-        public Count;
+    export class PublicationsController {
         public items:IPublication[];
         public filtered:IPublication[];
         public showBooks:boolean;
         public showArticles:boolean;
+        public searchCriteria:string;
 
-        constructor($scope:ng.IScope, $http:ng.IHttpService) {
+        constructor($http:ng.IHttpService) {
             this.showBooks=true;
             this.showArticles=true;
-            $http.get("js/Publications.json").success(data => {
-                this.items = data;
-            });
-
+            $http.get("scripts/Publications.json").success((data:IPublication[]) => this.items = data);
         }
 
         public getClass(pub:IPublication):string {
@@ -49,15 +47,29 @@ module skViewer {
             }
         }
 
-        public itemFilter = item => {
-            var p:IPublication = item;
-            switch (p.Type) {
+        public itemFilter = (item:IPublication) => {
+            var t = this;
+            var qualifies = false;
+            switch (item.Type) {
                 case 'Article':
                 case 'Pamphlet':
-                    return this.showArticles;
+                    qualifies = t.showArticles;
+                    break;
                 default :
-                    return this.showBooks;
+                    qualifies = t.showBooks;
+                    break;
             }
+
+            if (qualifies && this.searchCriteria)
+            {
+                var searchCriteria = t.searchCriteria.toLowerCase();
+                qualifies = item.Title.toLowerCase().indexOf(searchCriteria) !== -1
+                    || item.Author.toLowerCase().indexOf(searchCriteria) !== -1
+                    || (item.PublishedIn && item.PublishedIn.toLowerCase().indexOf(searchCriteria) !== -1)
+                    || item.Date.toString().indexOf(searchCriteria) !== -1;
+            }
+
+            return qualifies;
         };
     }
     module.controller("PublicationsController", PublicationsController)
