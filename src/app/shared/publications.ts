@@ -1,4 +1,4 @@
-import {Publication} from "./shared/publication";
+import {Publication} from "./publication";
 export const PUBLICATIONS: Publication[] = [
   {
     "Id": 1,

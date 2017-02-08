@@ -1,0 +1,24 @@
+<md-tab-group>
+  <md-tab label="Books ({{books.length}})">
+    <md-card *ngFor="let pub of books; let i = index;">
+        <app-publication-detail [publication]="pub" ></app-publication-detail>
+    </md-card>
+
+  </md-tab>
+  <md-tab label="Articles ({{articles.length}})">
+    <md-card *ngFor="let pub of articles; let i = index;">
+      <app-publication-detail [publication]="pub" ></app-publication-detail>
+    </md-card>
+  </md-tab>
+  <md-tab label="Pamphlets ({{pamphlets.length}})">
+    <md-card *ngFor="let pub of pamphlets; let i = index;">
+      <app-publication-detail [publication]="pub" ></app-publication-detail>
+    </md-card>
+  </md-tab>
+  <md-tab label="All ({{all.length}})">
+    <md-card *ngFor="let pub of all; let i = index;">
+      <app-publication-detail [publication]="pub" ></app-publication-detail>
+    </md-card>
+  </md-tab>
+
+</md-tab-group>
