@@ -10,6 +10,9 @@ import {DateBadgeComponent} from "../date-badge/date-badge.component"
 })
 export class PublicationDetailComponent implements OnInit {
 
+  private static startOfSecondAuthorship: Date = new Date('1846-03-28');
+  private static startOfFirstAuthorship: Date = new Date('1841-09-29');
+
   constructor() {
 
   }
@@ -19,5 +22,25 @@ export class PublicationDetailComponent implements OnInit {
 
   @Input()
   publication: Publication;
+
+  getAuthorship(): string[] {
+    if (this.publication.type) return [];
+    if (this.publication.date > PublicationDetailComponent.startOfSecondAuthorship) return ['second-authorship'];
+    if (this.publication.date > PublicationDetailComponent.startOfFirstAuthorship) {
+      if (this.publication.author === 'S. Kierkegaard')
+        return ['first-authorship', 'parallel-authorship-religious'];
+      return ['first-authorship', 'parallel-authorship-aesthetic'];
+    }
+    return [];
+  }
+
+  getAuthorshipClass():string{
+    return this.getAuthorship().join(' ');
+  }
+
+   getIconClass():string{
+    return null;
+  //   if (this.publication.Type)
+   }
 
 }

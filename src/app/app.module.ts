@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import 'hammerjs';
 
 
@@ -12,6 +13,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { PublicationListComponent } from './publication-list/publication-list.component';
 import { PublicationDetailComponent } from './publication-detail/publication-detail.component';
 import { DateBadgeComponent } from './date-badge/date-badge.component';
+
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { DateBadgeComponent } from './date-badge/date-badge.component';
     FormsModule,
     HttpModule,
     MaterialModule.forRoot(),
+    FlexLayoutModule.forRoot()
   ],
   exports: [
 

@@ -1,9 +1,9 @@
 export interface Publication {
-  Id:number;
-  Title:string;
-  Date:Date;
-  Author:string;
-  Subtitle?:string;
-  Type?:string;
-  PublishedIn?:string;
+  id:number;
+  title:string;
+  date:Date;
+  author:string;
+  subtitle?:string;
+  type?:string;
+  publishedIn?:string;
 }

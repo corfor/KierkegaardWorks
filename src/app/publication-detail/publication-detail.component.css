@@ -1,0 +1,35 @@
+h2 {
+  display:inline-block;
+}
+app-date-badge {
+  background-color: darkgray;
+  display: inline-block;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 10px;
+}
+
+app-date-badge.first-authorship
+{
+  background-color: darkgreen !important;
+}
+
+app-date-badge.second-authorship
+{
+  background-color: darkblue;
+}
+
+app-date-badge.parallel-authorship-aesthetic
+{
+  font-style: italic;
+}
+
+.title {
+  font-weight: bold;
+  font-size: larger;
+}
+
+.subtitle {
+  font-weight: bold;
+  font-style: italic;
+}

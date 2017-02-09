@@ -1,4 +1,12 @@
-<md-card-content>
-  <app-date-badge [date]="publication.Date"></app-date-badge>
-  <h2>{{publication.Title}}</h2>
+<md-card-content fxLayout ="row" fxLayoutGap="5%" >
+    <div fxLayout="column" fxLayoutAlign="space-around">
+      <app-date-badge [date]="publication.date" [class]="getAuthorshipClass()"></app-date-badge>
+      <div style="text-align: center">{{publication.type}}</div>
+    </div>
+    <div fxLayout="column" >
+      <div class="title">{{publication.title}}</div>
+      <span class="subtitle" *ngIf="publication.subtitle">{{publication.subtitle}}</span>
+      <span *ngIf="publication.author">by {{publication.author}}</span>
+      <span *ngIf="publication.publishedIn">published in: {{publication.publishedIn}}</span>
+    </div>
 </md-card-content>
