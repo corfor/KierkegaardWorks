@@ -33,3 +33,8 @@ app-date-badge.parallel-authorship-aesthetic
   font-weight: bold;
   font-style: italic;
 }
+
+.publicationType {
+  text-align: center;
+  font-size: small;
+}
