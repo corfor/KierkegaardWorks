@@ -1,8 +1,13 @@
 <md-tab-group>
-  <md-tab label="Books ({{books.length}})">
+  <md-tab label="Books ({{books.length}})" >
     <md-card *ngFor="let pub of books; let i = index;">
         <app-publication-detail [publication]="pub" ></app-publication-detail>
     </md-card>
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px" style=" margin: 15px;" >
+      <div fxLayout="column" >Key:</div>
+      <div fxLayout="column" class="first-authorship pill">First Authorship</div>
+      <div fxLayout="column" class="pill second-authorship">Second Authorship</div>
+    </div>
 
   </md-tab>
   <md-tab label="Articles ({{articles.length}})">

@@ -1,5 +1,7 @@
 <md-toolbar color="primary">
-  <h1>Works of Kierkegaard</h1>
+  <div class="title">Works of Kierkegaard</div>
   <span class="spacer"></span>
-  <md-menu></md-menu>
+  <md-input-container >
+    <input md-input placeholder="Filter" [(value)]="filter">
+  </md-input-container>
 </md-toolbar>

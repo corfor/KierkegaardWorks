@@ -24,7 +24,7 @@ export class PublicationDetailComponent implements OnInit {
   publication: Publication;
 
   getAuthorship(): string[] {
-    if (this.publication.type) return [];
+    if (this.publication.type != 'Book') return [];
     if (this.publication.date > PublicationDetailComponent.startOfSecondAuthorship) return ['second-authorship'];
     if (this.publication.date > PublicationDetailComponent.startOfFirstAuthorship) {
       if (this.publication.author === 'S. Kierkegaard')

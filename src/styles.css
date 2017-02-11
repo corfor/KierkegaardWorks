@@ -8,3 +8,34 @@ body {
 .spacer{
   flex: 1 1 auto;
 }
+
+.pill
+{
+  background-color: darkgray;
+}
+
+.first-authorship .pill,
+.pill.first-authorship
+{
+  background-color: #3f51b5 !important;
+}
+
+.second-authorship .pill,
+.pill.second-authorship
+{
+  background-color: #3A9B6F !important;
+}
+
+.parallel-authorship-aesthetic
+{
+  font-style: italic;
+}
+
+.pill
+{
+  display: inline-block;
+  color: white;
+  font-weight: 600;
+  padding: 5px 15px;
+  border-radius: 10px;
+}
